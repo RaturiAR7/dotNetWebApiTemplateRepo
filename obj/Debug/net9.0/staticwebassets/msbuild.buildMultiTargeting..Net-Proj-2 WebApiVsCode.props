@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\.Net-Proj-2 WebApiVsCode.props" />
+</Project>
