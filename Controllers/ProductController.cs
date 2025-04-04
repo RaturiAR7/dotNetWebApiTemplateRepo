@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mappers;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -19,7 +21,8 @@ namespace Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var products=_context.Products.ToList();
+            var products=_context.Products.ToList()
+            .Select(s=>s.ToProductDto());
             return Ok(products);
         }   
         [HttpGet("{id}")]
@@ -30,8 +33,8 @@ namespace Controllers
             {
                 return NotFound();
             }
-            return Ok(product);
-
+            return Ok(product.ToProductDto());
         }
+        [HttpPost]
     }
 }
