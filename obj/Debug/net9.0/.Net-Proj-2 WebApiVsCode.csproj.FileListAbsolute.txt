@@ -104,3 +104,6 @@ D:\Work\Osmosys Internship\. Net\.Net-Proj-2 WebApiVsCode\bin\Debug\net9.0\ru\Mi
 D:\Work\Osmosys Internship\. Net\.Net-Proj-2 WebApiVsCode\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Work\Osmosys Internship\. Net\.Net-Proj-2 WebApiVsCode\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Work\Osmosys Internship\. Net\.Net-Proj-2 WebApiVsCode\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Work\Osmosys Internship\. Net\.Net-Proj-2 WebApiVsCode\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Work\Osmosys Internship\. Net\.Net-Proj-2 WebApiVsCode\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Work\Osmosys Internship\. Net\.Net-Proj-2 WebApiVsCode\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll

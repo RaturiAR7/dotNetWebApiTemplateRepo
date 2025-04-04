@@ -14,9 +14,9 @@ namespace Models
        public int Id{get;set;}
        [Column("name",TypeName ="VARCHAR(20)")]
         public string Name{get;set;}="";
-       [Column("brand",TypeName ="VARCHAR(10)")]
+       [Column("brand",TypeName ="VARCHAR(255)")]
         public string Brand{get;set;}="";
-       [Column("category",TypeName ="VARCHAR(10)")]
+       [Column("category",TypeName ="VARCHAR(255)")]
         public string Category{get;set;}="";
         [Column("price")]
         [Precision(16,2)]

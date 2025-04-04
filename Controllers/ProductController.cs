@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dtos.Product;
 using Mappers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using Services;
 
 namespace Controllers
@@ -13,6 +15,7 @@ namespace Controllers
     [ApiController]
     public class ProductController:ControllerBase
     {
+        
         private readonly ApplicationDbContext _context;
         public ProductController(ApplicationDbContext context)
         {
@@ -21,10 +24,20 @@ namespace Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var products=_context.Products.ToList()
-            .Select(s=>s.ToProductDto());
+            ////Without using DTO
+            ////Also get created at field
+            var products=_context.Products.ToList();
             return Ok(products);
         }   
+        ///Using DTO
+        // [HttpGet]
+        // public IActionResult GetAll()
+        // {
+                ///Removed createdat field using DTO 
+        //     var products=_context.Products.ToList()
+        //     .Select(s=>s.ToProductDto());
+        //     return Ok(products);
+        // }   
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
@@ -35,6 +48,29 @@ namespace Controllers
             }
             return Ok(product.ToProductDto());
         }
+        ///Without using DTO
         [HttpPost]
+        public IActionResult Create([FromBody] Product product)
+        {
+            Console.WriteLine("Category length: " + product.Category.Length);
+            Console.WriteLine("Category value: " + product.Category);
+
+            _context.Products.Add(product);
+            _context.SaveChanges();
+
+            return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
+        }
+        ////Using DTO
+        // [HttpPost]
+        // public IActionResult Create([FromBody] CreateProductRequestDto productDto)
+        // {
+
+        //     var productModel=productDto.ToProductCreateDTO();
+        //     Console.WriteLine("Category length: " + productDto.Category.Length);
+        //     Console.WriteLine("Category value: " + productDto.Category);
+        //     _context.Products.Add(productModel);
+        //     _context.SaveChanges();
+        //     return CreatedAtAction(nameof(GetById),new{id=productModel.Id},productModel.ToProductDto());
+        // }
     }
 }

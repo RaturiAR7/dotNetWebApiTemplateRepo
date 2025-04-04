@@ -21,5 +21,17 @@ namespace Mappers
                 Description=productModel.Description,
             };
         }
+        public static Product ToProductCreateDTO(this CreateProductRequestDto productDto)
+        {
+            return new Product
+            {
+                Name=productDto.Name,
+                Brand=productDto.Brand,
+                Category=productDto.Category,
+                Price=productDto.Price,
+                Description=productDto.Description,
+                CreateAt=productDto.CreateAt,
+            };
+        }
     }
 }
