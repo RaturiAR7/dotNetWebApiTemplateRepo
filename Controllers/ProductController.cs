@@ -26,35 +26,32 @@ namespace Controllers
         {
             ////Without using DTO
             ////Also get created at field
-            var products=_context.Products.ToList();
-            return Ok(products);
+            var allProducts=_context.Products.ToList();
+            return Ok(allProducts);
         }   
         ///Using DTO
         // [HttpGet]
         // public IActionResult GetAll()
         // {
                 ///Removed createdat field using DTO 
-        //     var products=_context.Products.ToList()
+        //     var allProducts=_context.Products.ToList()
         //     .Select(s=>s.ToProductDto());
-        //     return Ok(products);
+        //     return Ok(allProducts);
         // }   
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
-            var product=_context.Products.Find(id);
-            if(product==null)
+            var oneProduct=_context.Products.Find(id);
+            if(oneProduct==null)
             {
                 return NotFound();
             }
-            return Ok(product.ToProductDto());
+            return Ok(oneProduct.ToProductDto());
         }
         ///Without using DTO
         [HttpPost]
         public IActionResult Create([FromBody] Product product)
         {
-            Console.WriteLine("Category length: " + product.Category.Length);
-            Console.WriteLine("Category value: " + product.Category);
-
             _context.Products.Add(product);
             _context.SaveChanges();
 
@@ -78,19 +75,32 @@ namespace Controllers
         [HttpPut("{id}")]
         public IActionResult Update([FromRoute] int id,[FromBody] Product product)
         {
-            var prod=_context.Products.FirstOrDefault(x=>x.Id==id);
-            if(prod==null)
+            var productToUpdate=_context.Products.FirstOrDefault(x=>x.Id==id);
+            if(productToUpdate==null)
             {
                 return NotFound();
             }
-            prod.Name=product.Name;
-            prod.Brand=product.Brand;
-            prod.Category=product.Category;
-            prod.Description=product.Description;
-            prod.Price=product.Price;
+            productToUpdate.Name=product.Name;
+            productToUpdate.Brand=product.Brand;
+            productToUpdate.Category=product.Category;
+            productToUpdate.Description=product.Description;
+            productToUpdate.Price=product.Price;
             _context.SaveChanges();
-            return Ok(prod);
+            return Ok(productToUpdate);
         }
 
+        /////Delete
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            var productToDelete=_context.Products.FirstOrDefault(x=>x.Id==id);
+            if(productToDelete==null)
+            {
+                return NotFound();
+            }
+            _context.Products.Remove(productToDelete);
+            _context.SaveChanges();
+            return NoContent();
+        }
     }
 }
