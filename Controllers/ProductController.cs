@@ -72,5 +72,25 @@ namespace Controllers
         //     _context.SaveChanges();
         //     return CreatedAtAction(nameof(GetById),new{id=productModel.Id},productModel.ToProductDto());
         // }
+
+
+        ///Update
+        [HttpPut("{id}")]
+        public IActionResult Update([FromRoute] int id,[FromBody] Product product)
+        {
+            var prod=_context.Products.FirstOrDefault(x=>x.Id==id);
+            if(prod==null)
+            {
+                return NotFound();
+            }
+            prod.Name=product.Name;
+            prod.Brand=product.Brand;
+            prod.Category=product.Category;
+            prod.Description=product.Description;
+            prod.Price=product.Price;
+            _context.SaveChanges();
+            return Ok(prod);
+        }
+
     }
 }
